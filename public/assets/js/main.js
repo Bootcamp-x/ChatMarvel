@@ -1,26 +1,28 @@
 // lógica central de la aplicación
-
+saveChannel("general");
 let channels = document.querySelectorAll(".channel");
 
 channels.forEach((element) => {
-    element.addEventListener("click", function (e){
-        const previos = document.querySelectorAll(".channel.-active")
-        previos.forEach((element) => {
-          element.classList.remove("-active");
-        });
+  element.addEventListener("click", function (e) {
+    const previos = document.querySelectorAll(".channel.-active");
+    previos.forEach((element) => {
+      element.classList.remove("-active");
+    });
 
     const nameChannel = e.currentTarget.dataset.name;
-    let channelsSelected = document.querySelectorAll(`[data-name="${nameChannel}"]`);
+    let channelsSelected = document.querySelectorAll(
+      `[data-name="${nameChannel}"]`
+    );
     channelsSelected.forEach((element) => {
-      element.classList.add("-active")
-    })
-        
-    })
-})
+      element.classList.add("-active");
+    });
+  });
+});
 
 function saveChannel(channel) {
-  saveChannelLocally(channel);
+  let valido = saveChannelLocally(channel);
   renderChannels();
+  return valido;
 }
 
 function renderChannels() {
@@ -48,7 +50,10 @@ function getSavedChannels() {
 }
 function saveChannelLocally(channel) {
   let channels = getSavedChannels();
+  if (Object.keys(channels).find((nameChannel) => nameChannel == channel)) {
+    return false;
+  }
   channels[channel] = channel;
   localStorage.setItem("channels", JSON.stringify(channels));
+  return true;
 }
-
