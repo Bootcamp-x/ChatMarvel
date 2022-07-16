@@ -12,14 +12,7 @@ channels.forEach((element) => {
     let channelsSelected = document.querySelectorAll(`[data-name="${nameChannel}"]`);
     channelsSelected.forEach((element) => {
       element.classList.add("-active")
-
-        console.log(element)
     })
         
     })
 })
-
-
-let generals = document.querySelectorAll('[data-name="general"]');
-let forobardos = document.querySelectorAll('[data-name="forobardo"]');
-let randoms = document.querySelectorAll('[data-name="random"]');
