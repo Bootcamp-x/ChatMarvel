@@ -12,6 +12,7 @@ buttonEnter.addEventListener("click", function (event) {
         console.log(usernameValue);
         //guardar username en local storage
         almacenarUser(usernameValue)
+        window.location = 'main.html';
     } else {
         console.log("vacio");
     }
