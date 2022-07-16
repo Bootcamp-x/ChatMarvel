@@ -1,0 +1,24 @@
+.header{
+  position: relative;
+  border-bottom: 3px solid var(--c-black);
+  background-color:var(--c-green);
+}
+
+.header .title{
+  margin: 0;
+  font-size: 1em;
+  font-family: var(--ff-bold);
+}
+
+.header .hamburguer{
+  position: absolute;
+  display: none;
+  left: 0px;
+  top: 0px;
+}
+
+@media screen and (max-width: 480px) {
+  .header .hamburguer{
+    display: flex;
+  }
+}

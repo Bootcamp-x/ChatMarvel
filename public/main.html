@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <meta name="description" content="Allow to chat using websockets" />
+    <link rel="icon" href="./favicon.ico" type="image/x-icon" />
+
+    <link rel="stylesheet" href="assets/css/base/fonts.css" />
+    <link rel="stylesheet" href="assets/css/base/variables.css" />
+    <link rel="stylesheet" href="assets/css/base/reset.css" />
+    <link rel="stylesheet" href="assets/css/base/headdings.css" />
+    <link rel="stylesheet" href="assets/css/base/base.css" />
+    <link rel="stylesheet" href="assets/css/base/helpers.css" />
+
+    <link rel="stylesheet" href="assets/css/layout/grid.css" />
+    <link rel="stylesheet" href="assets/css/layout/header.css" />
+    <link rel="stylesheet" href="assets/css/layout/footer.css" />
+    <link rel="stylesheet" href="assets/css/layout/form-new-channel.css" />
+
+    <link rel="stylesheet" href="assets/css/components/inputs.css" />
+    <link rel="stylesheet" href="assets/css/components/window.css" />
+    <link rel="stylesheet" href="assets/css/components/light-box.css" />
+    <link rel="stylesheet" href="assets/css/components/buttons.css" />
+    <link rel="stylesheet" href="assets/css/components/tabs.css" />
+    <link rel="stylesheet" href="assets/css/components/message.css" />
+    <link rel="stylesheet" href="assets/css/components/separator.css" />
+
+    <link rel="stylesheet" href="assets/css/pages/main.css" />
+
+    <link rel="stylesheet" href="assets/css/shame.css" />
+    <title>Chat X | Log In</title>
+  </head>
+  <body class="center">
+    <div class="wrapper-app window main-grid">
+      <header id="user-header" class="header center window-dots">
+        <div id="js-open-channels" class="button-icon hamburguer">
+          <svg viewBox="0 0 469.333 469.333" width="16" height="16">
+            <path
+              d="M53.333,106.667H416c29.417,0,53.333-23.927,53.333-53.333S445.417,0,416,0H53.333C23.917,0,0,23.927,0,53.333
+              S23.917,106.667,53.333,106.667z"
+            />
+            <path
+              d="M416,181.333H53.333C23.917,181.333,0,205.26,0,234.667S23.917,288,53.333,288H416c29.417,0,53.333-23.927,53.333-53.333
+              S445.417,181.333,416,181.333z"
+            />
+            <path
+              d="M416,362.667H53.333C23.917,362.667,0,386.594,0,416s23.917,53.333,53.333,53.333H416
+              c29.417,0,53.333-23.927,53.333-53.333S445.417,362.667,416,362.667z"
+            />
+          </svg>
+        </div>
+        <h1 class="title">IRC - Welcome <span>@paul</span></h1>
+      </header>
+      <sections id="channel-list" class="channels padding16 relative">
+        <div class="list-channels">
+          <div id="js-close-channels" class="button-icon close">
+            <svg width="16" height="16" viewBox="0 0 348.333 348.334">
+              <path
+                d="M336.559,68.611L231.016,174.165l105.543,105.549c15.699,15.705,15.699,41.145,0,56.85
+                c-7.844,7.844-18.128,11.769-28.407,11.769c-10.296,0-20.581-3.919-28.419-11.769L174.167,231.003L68.609,336.563
+                c-7.843,7.844-18.128,11.769-28.416,11.769c-10.285,0-20.563-3.919-28.413-11.769c-15.699-15.698-15.699-41.139,0-56.85
+                l105.54-105.549L11.774,68.611c-15.699-15.699-15.699-41.145,0-56.844c15.696-15.687,41.127-15.687,56.829,0l105.563,105.554
+                L279.721,11.767c15.705-15.687,41.139-15.687,56.832,0C352.258,27.466,352.258,52.912,336.559,68.611z"
+              />
+            </svg>
+          </div>
+
+          <div id="js-open-menu" class="hamburguer"></div>
+          <h3 class="heading-2 title">Channels</h3>
+          <ul id="irc-channels">
+            <!-- remove this content and make it dynamic -->
+            <li data-name="general" class="channel irc">general</li>
+            <li data-name="forobardo" class="channel irc">forobardo</li>
+            <li data-name="random" class="channel irc">random</li>
+            <!-- ----------- -->
+          </ul>
+          <span id="js-open-lb" class="button -dark new-channel">
+            New channel</span
+          >
+        </div>
+
+        <footer class="footer">
+          <p>With love by <a href="#">Bootcamp X Team</a></p>
+        </footer>
+      </sections>
+
+      <sections class="tabs">
+        <!-- available modifiers -active, alert -->
+        <ul id="list-user-channels" class="list">
+          <li data-name="general" class="channel item -active">general</li>
+          <li data-name="forobardo" class="channel item">forobardo</li>
+          <li data-name="random" class="channel item">random</li>
+        </ul>
+      </sections>
+      <sections id="js-messages-list" class="chat padding24">
+        <!-- remover está sección -->
+
+        <ul id="js-messages-view" class="list-messages">
+          <li class="look-disabled message">
+            [12:12 am] <span class="username">@spectre37</span> aloha
+          </li>
+          <li class="look-disabled message">
+            [12:12 am] <span class="username">@paul</span> hi
+          </li>
+          <li class="look-disabled message">
+            [12:12 am] <span class="username">@paul</span> como tas
+          </li>
+          <li class="look-disabled message">
+            [12:12 am] <span class="username">@spectre37</span> muy bien
+          </li>
+          <li class="look-disabled message">
+            [12:14 am]
+            <span class="username">@paul</span>
+            https://www.youtube.com/watch?v=T2SsOWQAOZs&amp;ab_channel=Showa
+          </li>
+        </ul>
+        <form class="send-message">
+          <input
+            type="text"
+            id="js-input-user-message"
+            aria-label="Chat here"
+            class="input-text"
+            placeholder="Chat here..."
+            autocomplete="off"
+            autofocus=""
+          />
+          <button id="js-add-user-message" class="button -dark submit">
+            Send
+          </button>
+        </form>
+      </sections>
+    </div>
+    <div id="js-light-box" class="light-box">
+      <form action="createChannel" class="window form-new-channel">
+        <label for="channels" class="heading-2 center title window-dots"
+          >Create a new Channel</label
+        >
+        <div class="padding48">
+          <input
+            class="name-channel"
+            id="js-input-channel"
+            type="text"
+            placeholder="Name channel"
+          />
+          <div class="actions">
+            <button id="js-button-create-channel" class="button -dark">
+              Create Channel
+            </button>
+            <button id="js-close-lb" class="button cancel">Cancel</button>
+          </div>
+        </div>
+      </form>
+    </div>
+    <script src="assets/js/menu.js"></script>
+    <script src="assets/js/helpers.js"></script>
+    <script src="assets/js/format-date.js"></script>
+    <script src="assets/js/light-box.js"></script>
+    <script src="assets/js/login.js"></script>
+    <script src="assets/js/main.js"></script>
+  </body>
+</html>
