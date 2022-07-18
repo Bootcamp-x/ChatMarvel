@@ -17,7 +17,6 @@ channels.forEach((element) => {
         
     })
 })
-
 function saveChannel(channel) {
   saveChannelLocally(channel);
   renderChannels();
