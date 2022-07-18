@@ -16,18 +16,25 @@ window.addEventListener("click", function (e) {
 });
 const stringInput = document.querySelector(".name-channel");
 const pushString = document.querySelector("#js-button-create-channel");
+const channelNameEmpty = document.querySelector(".message-error-empty")
+const channelNameExists = document.querySelector(".channel-name-exists")
 pushString.addEventListener("click", function (e) {
   if (stringInput.value) {
-    //funcion de jaramillo
     let valido = saveChannel(stringInput.value);
     if (valido) {
       modalCreateChannel.style.display = "none";
       stringInput.value = "";
     } else {
-      alert("canal existente");
+      channelNameExists.style.display = "flex";
     }
   } else {
-    alert("nombre del canal vacio");
-  }
+    channelNameEmpty.style.display = "flex";
+  } 
 });
+stringInput.addEventListener("input", function(e){
+    channelNameEmpty.style.display = "none";
+})
+stringInput.addEventListener("input", function(e){
+    channelNameExists.style.display = "none";
+})
 /* end of functionality of modal create and close channels*/

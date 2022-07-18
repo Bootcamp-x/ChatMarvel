@@ -91,20 +91,6 @@
           <li class="look-disabled message">
             [12:12 am] <span class="username">@spectre37</span> aloha
           </li>
-          <li class="look-disabled message">
-            [12:12 am] <span class="username">@paul</span> hi
-          </li>
-          <li class="look-disabled message">
-            [12:12 am] <span class="username">@paul</span> como tas
-          </li>
-          <li class="look-disabled message">
-            [12:12 am] <span class="username">@spectre37</span> muy bien
-          </li>
-          <li class="look-disabled message">
-            [12:14 am]
-            <span class="username">@paul</span>
-            https://www.youtube.com/watch?v=T2SsOWQAOZs&amp;ab_channel=Showa
-          </li>
         </ul>
         <form class="send-message">
           <input
@@ -134,6 +120,16 @@
             type="text"
             placeholder="Name channel"
           />
+          <div class="message-error-empty" id="error" style="color: red;display: none;margin-bottom: 7px;">
+            <p>
+              The channel's name is empty
+            </p>
+          </div>
+          <div class="channel-name-exists" style="color: red;display: none;margin-bottom: 7px;">
+            <p>
+              The channel's name is already exists
+            </p>
+          </div>
           <div class="actions">
             <button id="js-button-create-channel" class="button -dark">
               Create Channel
