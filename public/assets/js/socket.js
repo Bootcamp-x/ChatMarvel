@@ -4,7 +4,7 @@ const socket = new WebSocket(socketUrl());
 function socketUrl() {
   return location.hostname == "localhost"
     ? "ws://localhost:3000"
-    : `wss://${location.hostname}:${location.port}`;
+    : `ws://${location.hostname}:${location.port}`;
 }
 
 function initSocket() {
@@ -20,7 +20,6 @@ function initSocket() {
     // logic to receive messages here
 
     //renderizar los mensajes que llegan
-
     console.log(event.data);
   });
 }
