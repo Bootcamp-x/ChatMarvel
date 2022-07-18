@@ -66,6 +66,17 @@ function saveChannelLocally(channelName) {
   return true;
 }
 
+
+let User = localStorage.getItem ("User")
+let publish = document.querySelector("#js-add-user-message")
+
+  publish.addEventListener("click", function (e) {
+    const chat = document.querySelector("#js-input-user-message");
+    console.log(chat.value)
+    const previos = document.querySelector(".channel.-active");
+    console.log(previos.innerHTML)
+  });
+
 function saveMessage(message) {
   let channels = getSavedChannels();
   channels.forEach((channel) => {
@@ -95,3 +106,4 @@ function renderMessages(channelName) {
 function getChannel(channelName) {
   return getSavedChannels().find((channel) => channel.name == channelName);
 }
+
