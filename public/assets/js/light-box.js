@@ -20,8 +20,8 @@ const channelNameEmpty = document.querySelector(".message-error-empty");
 const channelNameExists = document.querySelector(".channel-name-exists");
 pushString.addEventListener("click", function (e) {
   if (stringInput.value) {
-    let valido = saveChannel(stringInput.value);
-    selectsTabs(stringInput.value);
+    let valido = createChannel(stringInput.value);
+    loadChannel(stringInput.value);
 
     if (valido) {
       modalCreateChannel.style.display = "none";

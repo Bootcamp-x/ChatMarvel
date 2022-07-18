@@ -18,9 +18,10 @@ function initSocket() {
 
   socket.addEventListener("message", (event) => {
     // logic to receive messages here
-
-    //renderizar los mensajes que llegan
-    console.log(event.data);
+    let message = JSON.parse(event.data);
+    if (message.author != localStorage.getItem("user")) {
+      createMessage(message);
+    }
   });
 }
 
