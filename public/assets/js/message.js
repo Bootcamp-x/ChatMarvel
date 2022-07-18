@@ -8,7 +8,7 @@ publish.addEventListener("click", function (e) {
   message.content = content;
   message.channel = document.querySelector(".channel.-active").innerHTML;
   message.author = localStorage.getItem("user");
-  message.date = insertarHora();
+  message.date =(new Date()).toISOString();
   createMessage(message);
   sentMenssage(message);
   inputUserMessage.value = "";
@@ -34,7 +34,7 @@ function renderMessages(channelName) {
   let js_messages_view = document.querySelector("#js-messages-view");
   let js_messages_viewHTML = "";
   messages.forEach((message) => {
-    js_messages_viewHTML += `<li class="look-disabled message">[${message.date}] <span class="username">@${message.author}</span> ${message.content} </li>`;
+    js_messages_viewHTML += `<li class="look-disabled message">[${formatDate(message.date)}] <span class="username">@${message.author}</span> ${message.content} </li>`;
   });
   js_messages_view.innerHTML = js_messages_viewHTML;
 }

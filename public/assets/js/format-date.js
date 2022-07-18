@@ -1,6 +1,8 @@
 // logica para formatear fechas
-function insertarHora() {
-  let d = new Date();
+
+
+function formatDate(texDate) {
+  let d=new Date(texDate);
   let hora24 = d.getHours();
   let hora12 = hora24 % 12;
   hora12 = (hora12 < 10 ? "0" : "") + hora12;
@@ -11,6 +13,7 @@ function insertarHora() {
   } else {
     horaActual = hora12 + ":" + min + " pm";
   }
+
   console.log(horaActual);
   return horaActual;
 }
