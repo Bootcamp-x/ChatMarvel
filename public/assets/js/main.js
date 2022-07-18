@@ -1,5 +1,10 @@
 // lógica central de la aplicación
+let usernameString = localStorage.getItem("user")
 loadChannels();
-if (!localStorage.getItem("user")) {
+if (!usernameString) {
   window.location = "/";
+}
+else{
+  let spanUsername = document.querySelector("#username")
+  spanUsername.innerHTML = "@"+usernameString;
 }
