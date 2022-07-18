@@ -131,3 +131,6 @@
     border-radius: 0;
   }
 }
+#irc-channels .-active {
+  background-color: var(--c-green);
+}

@@ -9,8 +9,6 @@ if (buttonEnter) {
     event.preventDefault();
     let usernameValue = $username.value;
     if (usernameValue) {
-      console.log(usernameValue);
-      //guardar username en local storage
       almacenarUser(usernameValue);
       window.location = "main.html";
     } else {
@@ -20,5 +18,5 @@ if (buttonEnter) {
 }
 
 function almacenarUser(user) {
-  localStorage.setItem("User", user);
+  localStorage.setItem("user", user);
 }
