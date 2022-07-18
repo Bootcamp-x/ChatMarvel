@@ -57,3 +57,13 @@ function saveChannelLocally(channel) {
   localStorage.setItem("channels", JSON.stringify(channels));
   return true;
 }
+
+let User = localStorage.getItem ("User")
+let publish = document.querySelector("#js-add-user-message")
+
+  publish.addEventListener("click", function (e) {
+    const chat = document.querySelector("#js-input-user-message");
+    console.log(chat.value)
+    const previos = document.querySelector(".channel.-active");
+    console.log(previos.innerHTML)
+  });
