@@ -1,5 +1,13 @@
 // lógica central de la aplicación
+localStorage.clear();
 saveChannel("general");
+let message = {};
+message.author = "pepe";
+message.content = "hola mundo";
+message.date = "10:33 am";
+message.channel = "general";
+saveMessage(message);
+
 let channels = document.querySelectorAll(".channel");
 
 channels.forEach((element) => {
@@ -32,9 +40,9 @@ function renderChannels() {
   let irc_channels = document.getElementById("irc-channels");
   let list_user_channels = document.getElementById("list-user-channels");
   for (let key in channels) {
-    let channel = channels[key];
-    irc_channelsHTML += `<li data-name="${channel}" class="channel irc">${channel}</li>`;
-    list_user_channelsHTML += `<li data-name="${channel}" class="channel item">${channel}</li>`;
+    let channelName = channels[key].name;
+    irc_channelsHTML += `<li data-name="${channelName}" class="channel irc">${channelName}</li>`;
+    list_user_channelsHTML += `<li data-name="${channelName}" class="channel item">${channelName}</li>`;
   }
 
   irc_channels.innerHTML = irc_channelsHTML;
@@ -43,17 +51,47 @@ function renderChannels() {
 function getSavedChannels() {
   let channels = localStorage.getItem("channels");
   if (channels == null) {
-    localStorage.setItem("channels", JSON.stringify({}));
-    channels = "{}";
+    saveLocalStorage("channels", []);
+    channels = "[]";
   }
   return JSON.parse(channels);
 }
-function saveChannelLocally(channel) {
+function saveChannelLocally(channelName) {
   let channels = getSavedChannels();
-  if (Object.keys(channels).find((nameChannel) => nameChannel == channel)) {
+  if (channels.find((channel) => channel.name == channelName)) {
     return false;
   }
-  channels[channel] = channel;
-  localStorage.setItem("channels", JSON.stringify(channels));
+  channels.push({ name: channelName, messages: [] });
+  saveLocalStorage("channels", channels);
   return true;
+}
+
+function saveMessage(message) {
+  let channels = getSavedChannels();
+  channels.forEach((channel) => {
+    if (channel.name == message.channel) {
+      channel.messages.push(message);
+      let actualChannelName = channel.name;
+      saveLocalStorage("channels", channels);
+      renderMessages(actualChannelName);
+    }
+  });
+}
+
+function saveLocalStorage(key, object) {
+  localStorage.setItem(key, JSON.stringify(object));
+}
+
+function renderMessages(channelName) {
+  let { messages } = getChannel(channelName);
+  let js_messages_view = document.querySelector("#js-messages-view");
+  let js_messages_viewHTML = "";
+  messages.forEach((message) => {
+    js_messages_viewHTML += `<li class="look-disabled message">[${message.date}] <span class="username">@${message.author}</span> ${message.content} </li>`;
+  });
+  js_messages_view.innerHTML = js_messages_viewHTML;
+}
+
+function getChannel(channelName) {
+  return getSavedChannels().find((channel) => channel.name == channelName);
 }
