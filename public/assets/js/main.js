@@ -1,54 +1,61 @@
 // lógica central de la aplicación
-localStorage.clear();
-saveChannel("general");
-let message = {};
-message.author = "pepe";
-message.content = "hola mundo";
-message.date = insertarHora();
-message.channel = "general";
-saveMessage(message);
+// localStorage.clear();
 
-
-
-function insertarHora(){
+function insertarHora() {
   let d = new Date();
-  let hora24=d.getHours();
-  let hora12=hora24%12;
-  hora12=((hora12<10)? "0" : "" )+ hora12 ;
-  let min=((d.getMinutes()<10)? "0" : "")+d.getMinutes();
+  let hora24 = d.getHours();
+  let hora12 = hora24 % 12;
+  hora12 = (hora12 < 10 ? "0" : "") + hora12;
+  let min = (d.getMinutes() < 10 ? "0" : "") + d.getMinutes();
   let horaActual;
-  if(hora24<12){
-     horaActual = hora12 + ":" + min + " am";
-  }else{
-
-     horaActual = hora12 + ":" + min + " pm";
+  if (hora24 < 12) {
+    horaActual = hora12 + ":" + min + " am";
+  } else {
+    horaActual = hora12 + ":" + min + " pm";
   }
   console.log(horaActual);
-return horaActual;
+  return horaActual;
 }
 
-let channels = document.querySelectorAll(".channel");
+loadChannels();
+let generalChannels = document.querySelectorAll(".general");
+generalChannels.forEach((tab) => {
+  tab.classList.add("-active");
+});
+renderMessages("general");
 
-channels.forEach((element) => {
-  element.addEventListener("click", function (e) {
+function loadChannels() {
+  if (!getChannel("general")) {
+    saveChannel("general");
+  }
+  renderChannels();
+  let channels = document.querySelectorAll(".channel");
+  channels.forEach((channel) => {
+    addEventListenerChannel(channel);
+  });
+}
+function addEventListenerChannel(channelHTML) {
+  channelHTML.addEventListener("click", function (e) {
     const previos = document.querySelectorAll(".channel.-active");
-    previos.forEach((element) => {
-      element.classList.remove("-active");
+    previos.forEach((channelHTML) => {
+      channelHTML.classList.remove("-active");
     });
 
     const nameChannel = e.currentTarget.dataset.name;
-    let channelsSelected = document.querySelectorAll(
-      `[data-name="${nameChannel}"]`
-    );
-    channelsSelected.forEach((element) => {
-      element.classList.add("-active");
-    });
+    selectsTabs(nameChannel);
   });
-});
+}
+function selectsTabs(channel) {
+  let tabs = document.querySelectorAll("." + channel);
+  tabs.forEach((channelHTML) => {
+    channelHTML.classList.add("-active");
+    renderMessages(channel);
+  });
+}
 
 function saveChannel(channel) {
   let valido = saveChannelLocally(channel);
-  renderChannels();
+  loadChannels();
   return valido;
 }
 
@@ -60,8 +67,8 @@ function renderChannels() {
   let list_user_channels = document.getElementById("list-user-channels");
   for (let key in channels) {
     let channelName = channels[key].name;
-    irc_channelsHTML += `<li data-name="${channelName}" class="channel irc">${channelName}</li>`;
-    list_user_channelsHTML += `<li data-name="${channelName}" class="channel item">${channelName}</li>`;
+    irc_channelsHTML += `<li data-name="${channelName}" class="channel irc ${channelName}">${channelName}</li>`;
+    list_user_channelsHTML += `<li data-name="${channelName}" class="channel item ${channelName}">${channelName}</li>`;
   }
 
   irc_channels.innerHTML = irc_channelsHTML;
@@ -85,16 +92,20 @@ function saveChannelLocally(channelName) {
   return true;
 }
 
+let publish = document.querySelector("#js-add-user-message");
 
-let User = localStorage.getItem ("User")
-let publish = document.querySelector("#js-add-user-message")
-
-  publish.addEventListener("click", function (e) {
-    const chat = document.querySelector("#js-input-user-message");
-    console.log(chat.value)
-    const previos = document.querySelector(".channel.-active");
-    console.log(previos.innerHTML)
-  });
+publish.addEventListener("click", function (e) {
+  let inputUserMessage = document.querySelector("#js-input-user-message");
+  let content = inputUserMessage.value;
+  let message = {};
+  if (!content) return;
+  message.content = content;
+  message.channel = document.querySelector(".channel.-active").innerHTML;
+  message.author = localStorage.getItem("User");
+  message.date = insertarHora();
+  saveMessage(message);
+  inputUserMessage.value = "";
+});
 
 function saveMessage(message) {
   let channels = getSavedChannels();
@@ -125,4 +136,3 @@ function renderMessages(channelName) {
 function getChannel(channelName) {
   return getSavedChannels().find((channel) => channel.name == channelName);
 }
-
